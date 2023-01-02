@@ -1,0 +1,24 @@
+.form-container {
+    max-width: 400px;
+    height: 100%;
+    position: relative;
+    margin: auto;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+
+    #email {
+        margin-bottom: 1rem;
+    }
+
+    #password {
+        margin-bottom: 1rem;
+    }
+
+    #password-confirm{
+        margin-bottom: 1.5rem;
+    }
+}
