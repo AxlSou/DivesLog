@@ -109,7 +109,6 @@ const NewDiveForm = () => {
         </React.Fragment>
       ) : (
         <React.Fragment>
-        <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
         <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
           <Button
             color="inherit"
