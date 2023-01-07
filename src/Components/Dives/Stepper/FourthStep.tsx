@@ -4,9 +4,36 @@ import TextField from '@mui/material/TextField'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
+import Select, { SelectChangeEvent } from '@mui/material/Select'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import {
+  handleBuddy,
+  handleNotes,
+  selectFeeling,
+} from '../../../Features/stepperSlicer'
 
 const FourthStep = () => {
+  const { feeling } = useAppSelector((store) => store.stepper)
+  const dispatch = useAppDispatch()
+
+  const handleWeatherChange = (event: SelectChangeEvent) => {
+    dispatch(selectFeeling(event.target.value))
+  }
+
+  const handleTextChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const id = event.target.id
+    switch (id) {
+      case 'notes':
+        return dispatch(handleNotes(event.target.value))
+      case 'buddy':
+        return dispatch(handleBuddy(event.target.value))
+      default:
+        console.error('Wrong input')
+    }
+  }
+
   return (
     <>
       <h4>Experience</h4>
@@ -17,6 +44,8 @@ const FourthStep = () => {
           labelId="feeling"
           id="feeling"
           label="How did you feel about this dive?"
+          value={feeling}
+          onChange={handleWeatherChange}
         >
           <MenuItem value="Amazing">Amazing</MenuItem>
           <MenuItem value="Good">Good</MenuItem>
@@ -27,10 +56,11 @@ const FourthStep = () => {
       <h6>Comments</h6>
       <Stack spacing={3}>
         <TextField
-          id="Notes"
+          id="notes"
           label="Write down the memmories of your dive"
           multiline
           rows={4}
+          onChange={handleTextChange}
         />
         <TextField
           id="buddy"
@@ -38,6 +68,7 @@ const FourthStep = () => {
           variant="outlined"
           size="small"
           placeholder="Who did you dive with?"
+          onChange={handleTextChange}
         />
       </Stack>
     </>
