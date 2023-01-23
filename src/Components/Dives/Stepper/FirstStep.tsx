@@ -17,10 +17,10 @@ import {
   handleDiveTitle,
   handleMaxDepth,
   selectDiveType,
-} from '../../../Features/stepperSlicer'
+} from '../../../Features/formSlicer'
 
 const FirstStep = () => {
-  const { diveType, date } = useAppSelector((store) => store.stepper)
+  const { diveType, date } = useAppSelector((store) => store.form)
   const dispatch = useAppDispatch()
 
   const handleDateChange = (newValue: Dayjs | null) => {

@@ -18,10 +18,10 @@ import {
   selectCurrent,
   selectWaterType,
   selectWeather,
-} from '../../../Features/stepperSlicer'
+} from '../../../Features/formSlicer'
 
 const SecondStep = () => {
-  const { weather, current } = useAppSelector((store) => store.stepper)
+  const { weather, current } = useAppSelector((store) => store.form)
   const dispatch = useAppDispatch()
 
   const handleWeatherChange = (event: SelectChangeEvent) => {

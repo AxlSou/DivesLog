@@ -10,10 +10,10 @@ import {
   handleBuddy,
   handleNotes,
   selectFeeling,
-} from '../../../Features/stepperSlicer'
+} from '../../../Features/formSlicer'
 
 const FourthStep = () => {
-  const { feeling } = useAppSelector((store) => store.stepper)
+  const { feeling } = useAppSelector((store) => store.form)
   const dispatch = useAppDispatch()
 
   const handleWeatherChange = (event: SelectChangeEvent) => {

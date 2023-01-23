@@ -16,10 +16,10 @@ import {
   selectCylinder,
   selectGasMixture,
   selectSuit,
-} from '../../../Features/stepperSlicer'
+} from '../../../Features/formSlicer'
 
 const ThirdStep = () => {
-  const { suit, gasMixture } = useAppSelector((store) => store.stepper)
+  const { suit, gasMixture } = useAppSelector((store) => store.form)
   const dispatch = useAppDispatch()
 
   const handleSuitChange = (event: SelectChangeEvent) => {

@@ -54,10 +54,6 @@ const NewDiveForm = () => {
     });
   };
 
-  const handleReset = () => {
-    setActiveStep(0)
-  }
-
   const handleStep = () => {
     switch (activeStep) {
       case 0:
@@ -72,6 +68,8 @@ const NewDiveForm = () => {
         console.error('Invalid step')
     }
   }
+
+  console.log(activeStep)
 
   return (
     <div>
@@ -96,18 +94,7 @@ const NewDiveForm = () => {
           );
         })}
       </Stepper>
-      <form>{handleStep()}</form>
-      {activeStep === steps.length ? (
-        <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={handleReset}>Reset</Button>
-          </Box>
-        </React.Fragment>
-      ) : (
+      <form id='divesForm' onSubmit={() => console.log('submited')}>{handleStep()}</form>
         <React.Fragment>
         <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
           <Button
@@ -119,17 +106,20 @@ const NewDiveForm = () => {
             Back
           </Button>
           <Box sx={{ flex: '1 1 auto' }} />
-          {isStepOptional(activeStep) && (
+          {(isStepOptional(activeStep) && activeStep !== 3) && (
             <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
               Skip
             </Button>
           )}
-          <Button onClick={handleNext}>
-            {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
-          </Button>
+          {activeStep === steps.length - 1 ? 
+            <Button type='submit' form='divesForm'>
+              Submit
+            </Button> :
+            <Button onClick={handleNext}>
+              Next
+            </Button>}
         </Box>
       </React.Fragment>
-      )}
     </div>
   )
 }
