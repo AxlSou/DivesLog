@@ -7,13 +7,25 @@ interface Steps {
 
 const initialState: Steps = {
     activeStep: 0,
-    skipped: new Set()
+    skipped: new Set<number>()
 }
 
 export const stepperSlice = createSlice({
     name: 'stepper',
     initialState,
-    reducers: {}
+    reducers: {
+        nextStep: (state) => {
+            state.activeStep += 1
+        },
+        previousStep: (state) => {
+            state.activeStep -= 1
+        },
+        skipStep: (state, action: PayloadAction<Set<number>>) => {
+            state.skipped = action.payload
+        }
+    }
 })
+
+export const { nextStep, previousStep, skipStep } = stepperSlice.actions
 
 export default stepperSlice.reducer
