@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import '../Login/index.scss'
 import { Form, Button, Card, Container } from 'react-bootstrap'
 import { useAppDispatch } from '../../hooks'
-import { auth } from '../../firebase'
+import { auth } from '../../firebaseConfig'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { login } from '../../Features/userSlice'
 import { useNavigate, Link } from 'react-router-dom'
+import { setDoc, doc } from 'firebase/firestore'
+import { db } from '../../firebaseConfig'
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>()
@@ -37,6 +39,9 @@ const SignUp = () => {
                 })
               )
             )
+            .then(() => {
+              setDoc(doc(db, "DivesLog", userAuth.user.uid), {user: userAuth.user.displayName})
+            })
             .catch((error) => {
               console.log('user not updated')
             })
