@@ -1,4 +1,4 @@
-import { auth } from './firebase'
+import { auth } from './firebaseConfig'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect } from 'react'
 import { useAppDispatch } from './hooks'
@@ -17,7 +17,6 @@ function App () {
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
-      console.log(userAuth)
       if (userAuth) {
         dispatch(
           login({
