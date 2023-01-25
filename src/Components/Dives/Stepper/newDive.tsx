@@ -9,17 +9,23 @@ import FirstStep from './FirstStep'
 import SecondStep from './SecondStep'
 import ThirdStep from './ThirdStep'
 import FourthStep from './FourthStep'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import { nextStep, previousStep, skipStep } from '../../../Features/stepperSlicer'
+import { setDoc, collection, doc } from 'firebase/firestore'
+import { db } from '../../../firebaseConfig'
 
 const steps = ['General Information', 'Conditions', 'Equipment', 'Experience']
 
 const NewDiveForm = () => {
-  const [activeStep, setActiveStep] = React.useState(0)
-  const [skipped, setSkipped] = React.useState(new Set<number>());
+  const { activeStep, skipped } = useAppSelector((store) => store.stepper)
+  const { user } = useAppSelector((store) => store.user)
+  const { diveTitle, diveSite, date, diveType, maxDepth, bottomTime, weather, airTemp, surfaceTemp, bottomTemp, visibility, waterType, current, suit, weight, cylinder, cylinderSize, gasMixture, feeling, notes, buddy } = useAppSelector((store) => store.form)
+  const dispatch = useAppDispatch()
 
   const isStepOptional = (step: number) => {
     return [1, 2, 3].includes(step);
   };
-  
+
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
   };
@@ -31,12 +37,12 @@ const NewDiveForm = () => {
       newSkipped.delete(activeStep);
     }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
+    dispatch(nextStep())
+    dispatch(skipStep(newSkipped));
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1)
+    dispatch(previousStep())
   }
 
   const handleSkip = () => {
@@ -46,12 +52,12 @@ const NewDiveForm = () => {
       throw new Error("You can't skip a step that isn't optional.");
     }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
+    dispatch(nextStep());
+
+    const newSkipped = new Set(skipped.values());
+    newSkipped.add(activeStep);
+    dispatch(skipStep(newSkipped))
+
   };
 
   const handleStep = () => {
@@ -62,14 +68,26 @@ const NewDiveForm = () => {
         return <SecondStep />
       case 2:
         return <ThirdStep />
-      case 3: 
+      case 3:
         return <FourthStep />
       default:
         console.error('Invalid step')
     }
   }
 
-  console.log(activeStep)
+  const logsRef = collection(db, 'DivesLog')
+
+  const handleSubmit = async () => {
+    if (user.uid) {
+      await setDoc(doc(db, "DivesLog", user.uid), {
+        diveTitle: diveTitle,
+        diveSite: diveSite,
+        bottomTime: bottomTime,
+        maxDepth: maxDepth
+      });
+      window.location.reload()
+    }
+  }
 
   return (
     <div>
@@ -94,8 +112,8 @@ const NewDiveForm = () => {
           );
         })}
       </Stepper>
-      <form id='divesForm' onSubmit={() => console.log('submited')}>{handleStep()}</form>
-        <React.Fragment>
+      <form>{handleStep()}</form>
+      <React.Fragment>
         <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
           <Button
             color="inherit"
@@ -111,8 +129,8 @@ const NewDiveForm = () => {
               Skip
             </Button>
           )}
-          {activeStep === steps.length - 1 ? 
-            <Button type='submit' form='divesForm'>
+          {activeStep === steps.length - 1 ?
+            <Button onClick={handleSubmit}>
               Submit
             </Button> :
             <Button onClick={handleNext}>
