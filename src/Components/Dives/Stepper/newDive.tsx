@@ -75,15 +75,30 @@ const NewDiveForm = () => {
     }
   }
 
-  const logsRef = collection(db, 'DivesLog')
-
   const handleSubmit = async () => {
     if (user.uid) {
-      await setDoc(doc(db, "DivesLog", user.uid), {
-        diveTitle: diveTitle,
-        diveSite: diveSite,
-        bottomTime: bottomTime,
-        maxDepth: maxDepth
+      await setDoc(doc(db, "DivesLogs", user.uid, "Dives", diveTitle), {
+          diveTitle: diveTitle,
+          diveSite: diveSite,
+          date: date,
+          diveType: diveType,
+          bottomTime: bottomTime,
+          maxDepth: maxDepth,
+          weather: weather,
+          airTemp: airTemp,
+          surfaceTemp: surfaceTemp,
+          bottomTemp: bottomTemp,
+          visibility: visibility,
+          waterType: waterType,
+          current: current,
+          suit: suit,
+          weight: weight,
+          cylinder: cylinder,
+          cylinderSize: cylinderSize,
+          gasMixture: gasMixture,
+          feeling: feeling,
+          notes: notes,
+          buddy: buddy
       });
       window.location.reload()
     }
