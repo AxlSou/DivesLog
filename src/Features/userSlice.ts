@@ -1,18 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { DocumentData } from 'firebase/firestore'
 
 interface User {
   user: {
     email?: string
     uid?: string
     displayName?: string
-}
+  }
 }
 
 const initialState: User = {
   user: {
     email: "",
     uid: "",
-    displayName: ""
+    displayName: "",
   },
 }
 
@@ -25,7 +26,7 @@ export const userSlice = createSlice({
     },
     logout: (state) => {
       state.user = {}
-    },
+    }
   },
 })
 
