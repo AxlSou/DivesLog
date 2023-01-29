@@ -11,7 +11,7 @@ import ThirdStep from './ThirdStep'
 import FourthStep from './FourthStep'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { nextStep, previousStep, skipStep } from '../../../Features/stepperSlicer'
-import { setDoc, collection, doc } from 'firebase/firestore'
+import { setDoc, doc } from 'firebase/firestore'
 import { db } from '../../../firebaseConfig'
 
 const steps = ['General Information', 'Conditions', 'Equipment', 'Experience']
@@ -47,8 +47,6 @@ const NewDiveForm = () => {
 
   const handleSkip = () => {
     if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
       throw new Error("You can't skip a step that isn't optional.");
     }
 
@@ -78,27 +76,27 @@ const NewDiveForm = () => {
   const handleSubmit = async () => {
     if (user.uid) {
       await setDoc(doc(db, "DivesLogs", user.uid, "Dives", diveTitle), {
-          diveTitle: diveTitle,
-          diveSite: diveSite,
-          date: date,
-          diveType: diveType,
-          bottomTime: bottomTime,
-          maxDepth: maxDepth,
-          weather: weather,
-          airTemp: airTemp,
-          surfaceTemp: surfaceTemp,
-          bottomTemp: bottomTemp,
-          visibility: visibility,
-          waterType: waterType,
-          current: current,
-          suit: suit,
-          weight: weight,
-          cylinder: cylinder,
-          cylinderSize: cylinderSize,
-          gasMixture: gasMixture,
-          feeling: feeling,
-          notes: notes,
-          buddy: buddy
+        diveTitle: diveTitle,
+        diveSite: diveSite,
+        date: date,
+        diveType: diveType,
+        bottomTime: bottomTime,
+        maxDepth: maxDepth,
+        weather: weather,
+        airTemp: airTemp,
+        surfaceTemp: surfaceTemp,
+        bottomTemp: bottomTemp,
+        visibility: visibility,
+        waterType: waterType,
+        current: current,
+        suit: suit,
+        weight: weight,
+        cylinder: cylinder,
+        cylinderSize: cylinderSize,
+        gasMixture: gasMixture,
+        feeling: feeling,
+        notes: notes,
+        buddy: buddy
       });
       window.location.reload()
     }
