@@ -5,6 +5,14 @@
     z-index: 5;
     background-color: #fff;
 
+    .title {
+        position: absolute;
+        margin: 3rem;
+        text-align: left;
+        border-left: 3px solid #1e73be;
+        padding-left: 1rem;
+    }
+
     .dialog-container {
         width: 100%;
         height: 100%;
