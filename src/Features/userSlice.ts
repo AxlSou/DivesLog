@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { DocumentData } from 'firebase/firestore'
+import { createSlice } from '@reduxjs/toolkit'
 
 interface User {
   user: {
