@@ -3,28 +3,28 @@ import dayjs, { Dayjs } from 'dayjs'
 
 const today = new Date()
 
-interface Form {
+export interface Form {
   diveTitle: string
   diveSite: string
-  date: Dayjs | null | string
-  diveType: string
-  maxDepth: string
-  bottomTime: string
-  weather: string
-  airTemp: string
-  surfaceTemp: string
-  bottomTemp: string
-  visibility: string
-  waterType: string
-  current: string
-  suit: string
-  weight: string
-  cylinder: string
-  cylinderSize: string
-  gasMixture: string
-  feeling: string
-  notes: string
-  buddy: string
+  date?: Dayjs | null | string
+  diveType?: string
+  maxDepth?: string
+  bottomTime?: string
+  weather?: string
+  airTemp?: string
+  surfaceTemp?: string
+  bottomTemp?: string
+  visibility?: string
+  waterType?: string
+  current?: string
+  suit?: string
+  weight?: string
+  cylinder?: string
+  cylinderSize?: string
+  gasMixture?: string
+  feeling?: string
+  notes?: string
+  buddy?: string
 }
 
 const initialState: Form = {
