@@ -52,10 +52,10 @@
             padding: 3rem;
 
             header {
-                width: 87%;
-                position: absolute;
+                width: 100%;
+                position: relative;
                 display: flex;
-                border-bottom: 2px solid gray;
+                border-bottom: 2px solid #1e73be;
 
                 h4 {
                     margin-left: 1.5rem;
@@ -64,8 +64,16 @@
                 }
             }
 
+            .no-user {
+                position: relative;
+                top: 10vh;
+                border: 1px solid rgba(26, 32, 39, 0.12);
+                border-radius: 12px;
+                padding: 3rem;
+            }
+
             section {
-                margin-top: 7rem;
+                margin-top: 3rem;
             }
         }
     }
