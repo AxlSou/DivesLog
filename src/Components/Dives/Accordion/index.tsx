@@ -4,6 +4,11 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AccordionActions from '@mui/material/AccordionActions';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 interface Props {
   diveTitle: string
@@ -38,12 +43,13 @@ function ControlledAccordions({ diveTitle, diveSite, date, diveType, maxDepth, b
       setExpanded(isExpanded ? panel : false);
     };
 
+    console.log(expanded)
+
   return (
-    <div>
       <Accordion expanded={expanded === diveTitle} onChange={handleChange(diveTitle)}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls="panelbh-content"
+          aria-controls={diveTitle}
           id={diveTitle}
         >
           <Typography sx={{ width: '25%', flexShrink: 0 }}>
@@ -58,8 +64,14 @@ function ControlledAccordions({ diveTitle, diveSite, date, diveType, maxDepth, b
             Aliquam eget maximus est, id dignissim quam.
           </Typography>
         </AccordionDetails>
+        <Divider />
+        <AccordionActions>
+          <Button size="small" startIcon={<EditIcon />}>Edit</Button>
+          <Button size='small' startIcon={<DeleteIcon />} color="error">
+            Delete
+          </Button>
+        </AccordionActions>
       </Accordion>
-    </div>
   );
 }
 
