@@ -117,7 +117,8 @@ export const formSlice = createSlice({
     },
     handleBuddy: (state, action: PayloadAction<string>) => {
       state.buddy = action.payload
-    }
+    },
+    handleNewDive: () => initialState
   },
 })
 
@@ -142,7 +143,8 @@ export const {
   selectGasMixture,
   selectFeeling,
   handleNotes,
-  handleBuddy
+  handleBuddy,
+  handleNewDive
 } = formSlice.actions
 
 export default formSlice.reducer
