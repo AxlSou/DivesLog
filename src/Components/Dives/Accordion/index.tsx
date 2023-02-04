@@ -93,8 +93,8 @@ function ControlledAccordions({ ...props }: Props) {
         <Typography sx={{ width: '25%', flexShrink: 0 }}>
           {props.diveTitle}
         </Typography>
-        <Typography sx={{ color: 'text.secondary', marginRight: '15%' }}>{props.diveSite}</Typography>
-        <Typography sx={{ color: 'text.secondary' }}>{props.date}</Typography>
+        <Typography sx={{ color: 'text.secondary', width: '20%' }}>{props.diveSite}</Typography>
+        <Typography sx={{ color: 'text.secondary', width: '20%' }}>{props.date}</Typography>
       </AccordionSummary>
       <AccordionDetails className='log-details'>
         {(props.diveType[1]) && <Typography>{`${props.diveType[0]}: ${props.diveType[1]}`}</Typography>}
