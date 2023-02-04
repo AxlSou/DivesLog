@@ -31,6 +31,24 @@ const Dives = () => {
         diveTitle={log.diveTitle} 
         diveSite={log.diveSite} 
         date={log.date}
+        diveType={['Dive Type', log.diveType]}
+        maxDepth={['Max Depth', log.maxDepth]}
+        bottomTime={['Bottom Time', log.bottomTime]}
+        weather={['Weather', log.weather]}
+        airTemp={['Air Temperature', log.airTemp]}
+        surfaceTemp={['Surface Temperature', log.surfaceTemp]}
+        bottomTemp={['Bottom Tempreature', log.bottomTemp]}
+        visibility={['Visibility', log.visibility]}
+        waterType={['Water Type', log.waterType]}
+        current={['Current', log.current]}
+        suit={['Suit', log.suit]}
+        weight={['Weight', log.weight]}
+        cylinder={['Cylinder', log.cylinder]}
+        cylinderSize={['Cylinder Size', log.cylinderSize]}
+        gasMixture={['Gas Mixture', log.gasMixture]}
+        feeling={['Feeling', log.feeling]}
+        notes={['Notes', log.notes]}
+        buddy={['Buddy', log.buddy]}
         />
       )
     })
