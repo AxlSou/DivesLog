@@ -13,7 +13,7 @@ import {
 } from '../../../Features/formSlicer'
 
 const FourthStep = () => {
-  const { feeling } = useAppSelector((store) => store.form)
+  const { feeling, notes, buddy } = useAppSelector((store) => store.form)
   const dispatch = useAppDispatch()
 
   const handleWeatherChange = (event: SelectChangeEvent) => {
@@ -60,6 +60,7 @@ const FourthStep = () => {
           label="Write down the memmories of your dive"
           multiline
           rows={4}
+          value={notes}
           onChange={handleTextChange}
         />
         <TextField
@@ -68,6 +69,7 @@ const FourthStep = () => {
           variant="outlined"
           size="small"
           placeholder="Who did you dive with?"
+          value={buddy}
           onChange={handleTextChange}
         />
       </Stack>

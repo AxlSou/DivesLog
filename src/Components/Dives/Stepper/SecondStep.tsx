@@ -21,7 +21,7 @@ import {
 } from '../../../Features/formSlicer'
 
 const SecondStep = () => {
-  const { weather, current } = useAppSelector((store) => store.form)
+  const { weather, current, airTemp, surfaceTemp, bottomTemp, waterType, visibility } = useAppSelector((store) => store.form)
   const dispatch = useAppDispatch()
 
   const handleWeatherChange = (event: SelectChangeEvent) => {
@@ -85,6 +85,7 @@ const SecondStep = () => {
           variant="outlined"
           size="small"
           placeholder="What was the air temperature?"
+          value={airTemp}
           onChange={handleTextChange}
         />
         <TextField
@@ -93,6 +94,7 @@ const SecondStep = () => {
           variant="outlined"
           size="small"
           placeholder="What was the surface temperature?"
+          value={surfaceTemp}
           onChange={handleTextChange}
         />
         <TextField
@@ -101,6 +103,7 @@ const SecondStep = () => {
           variant="outlined"
           size="small"
           placeholder="What was the bottom temperature?"
+          value={bottomTemp}
           onChange={handleTextChange}
         />
       </Stack>
@@ -111,6 +114,7 @@ const SecondStep = () => {
           row
           aria-labelledby="water-type"
           defaultValue="salt"
+          value={waterType}
           name="radio-buttons-group"
           onChange={handleWaterTypeChange}
         >
@@ -125,6 +129,7 @@ const SecondStep = () => {
         variant="outlined"
         size="small"
         placeholder="How far could you see? (meters)"
+        value={visibility}
         onChange={handleTextChange}
       />
       <h6>Current</h6>

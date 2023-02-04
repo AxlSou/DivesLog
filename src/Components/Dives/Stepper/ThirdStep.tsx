@@ -19,7 +19,7 @@ import {
 } from '../../../Features/formSlicer'
 
 const ThirdStep = () => {
-  const { suit, gasMixture } = useAppSelector((store) => store.form)
+  const { suit, gasMixture, weight, cylinder, cylinderSize } = useAppSelector((store) => store.form)
   const dispatch = useAppDispatch()
 
   const handleSuitChange = (event: SelectChangeEvent) => {
@@ -73,21 +73,23 @@ const ThirdStep = () => {
       <Stack spacing={3}>
         <TextField
           id="weight"
-          label="How was the amount of weight you used?"
+          label="What was the amount of weight you used?"
           variant="outlined"
           size="small"
+          value={weight}
           onChange={handleTextChange}
         />
       </Stack>
       <h6>Cylinder</h6>
       <Stack spacing={1}>
         <FormControl>
-          <FormLabel id="water-type">What type of water was it?</FormLabel>
+          <FormLabel id="cylinder-type">What type of cylinder was it?</FormLabel>
           <RadioGroup
             row
-            aria-labelledby="water-type"
+            aria-labelledby="cylinder-type"
             defaultValue="steel"
             name="radio-buttons-group"
+            value={cylinder}
             onChange={handleCylinderChange}
           >
             <FormControlLabel value="steel" control={<Radio />} label="Steel" />
@@ -104,6 +106,7 @@ const ThirdStep = () => {
           label="What was the cylinder size"
           variant="outlined"
           size="small"
+          value={cylinderSize}
           onChange={handleTextChange}
         />
       </Stack>

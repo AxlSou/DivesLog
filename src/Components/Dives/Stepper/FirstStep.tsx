@@ -20,7 +20,7 @@ import {
 } from '../../../Features/formSlicer'
 
 const FirstStep = () => {
-  const { diveType, date } = useAppSelector((store) => store.form)
+  const { diveTitle, diveSite, diveType, date, bottomTime, maxDepth } = useAppSelector((store) => store.form)
   const dispatch = useAppDispatch()
 
   const handleDateChange = (newValue: Dayjs | null) => {
@@ -60,6 +60,7 @@ const FirstStep = () => {
             variant="outlined"
             size="small"
             placeholder="What do you want to call your dive?"
+            value={diveTitle}
             required
             onChange={handleTextChange}
           />
@@ -69,6 +70,7 @@ const FirstStep = () => {
             variant="outlined"
             size="small"
             placeholder="Where did you dive?"
+            value={diveSite}
             required
             onChange={handleTextChange}
           />
@@ -105,6 +107,7 @@ const FirstStep = () => {
           variant="outlined"
           size="small"
           placeholder="How deep did you go? (meters)"
+          value={maxDepth}
           required
           onChange={handleTextChange}
         />
@@ -114,6 +117,7 @@ const FirstStep = () => {
           variant="outlined"
           size="small"
           placeholder="How long was your dive? (mins)"
+          value={bottomTime}
           required
           onChange={handleTextChange}
         />
