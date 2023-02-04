@@ -22,10 +22,11 @@ export const stepperSlice = createSlice({
         },
         skipStep: (state, action: PayloadAction<Set<number>>) => {
             state.skipped = action.payload
-        }
+        },
+        newStepper: () => initialState
     }
 })
 
-export const { nextStep, previousStep, skipStep } = stepperSlice.actions
+export const { nextStep, previousStep, skipStep, newStepper } = stepperSlice.actions
 
 export default stepperSlice.reducer
