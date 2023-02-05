@@ -1,11 +1,17 @@
 import './index.scss'
+import Lottie from 'react-lottie'
+import { defaultOptions } from '../Dives'
+import DiverImg from '../../Assets/Diver.jpg'
 
 const About = () => {
   return (
     <div className="page-background">
+      <div className='loader'>
+        <Lottie options={defaultOptions} speed={0.5} />
+      </div>
       <div className="about-container">
-        <h1>About this project</h1>
-        <section className="about-section">
+        <div className="about-section">
+          <h1>About this project</h1>
           <p>
             In scuba diving, it is important to keep a log of your dives. A dive
             log is a record of your diving experiences, including information
@@ -44,7 +50,11 @@ const About = () => {
             or an experienced diver, keeping a log of your dives can help you
             stay safe, document your experiences, and improve your skills.
           </p>
-        </section>
+        </div>
+        <img src={DiverImg} alt="Diver" />
+      </div>
+      <div className='how-to-use'>
+        <h1>How to use it?</h1>
       </div>
     </div>
   )
