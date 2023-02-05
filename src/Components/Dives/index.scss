@@ -5,10 +5,22 @@
     z-index: 5;
     background-color: #fff;
 
+    .loader {
+        width: 100%;
+        position: absolute;
+        margin: auto;
+        animation: fadeOut 1s 1s;
+        animation-fill-mode: forwards;
+    }
+
     .dives-container{
         margin: 4rem 2rem;
         position: relative;
         display: flex;
+        opacity: 0;
+        transform-style: preserve-3d;
+        animation: fadeIn 1s forwards;
+        animation-delay: 1.8s;
 
         .title {
             position: absolute;

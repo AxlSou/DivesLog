@@ -7,10 +7,21 @@ import { useEffect, useState } from 'react'
 import ControlledAccordions from './Accordion'
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box/Box'
+import Lottie from 'react-lottie'
+import bubbles from '../../Assets/lotties/30221-bubbles.json'
+
+export const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: bubbles,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice"
+  }
+};
 
 const Dives = () => {
   const { user } = useAppSelector((store) => store.user)
-  const [logs, setLogs] = useState<DocumentData>([]);
+  const [logs, setLogs] = useState<DocumentData>([])
 
   useEffect(() => {
     if (user.uid) {
@@ -26,29 +37,29 @@ const Dives = () => {
   const handleLogs = () => {
     const data = logs.map((log: DocumentData) => {
       return (
-      <ControlledAccordions 
-        key={log.diveTitle}
-        diveTitle={log.diveTitle} 
-        diveSite={log.diveSite} 
-        date={log.date}
-        diveType={['Dive Type', log.diveType]}
-        maxDepth={['Max Depth', log.maxDepth]}
-        bottomTime={['Bottom Time', log.bottomTime]}
-        weather={['Weather', log.weather]}
-        airTemp={['Air Temperature', log.airTemp]}
-        surfaceTemp={['Surface Temperature', log.surfaceTemp]}
-        bottomTemp={['Bottom Tempreature', log.bottomTemp]}
-        visibility={['Visibility', log.visibility]}
-        waterType={['Water Type', log.waterType]}
-        current={['Current', log.current]}
-        suit={['Suit', log.suit]}
-        weight={['Weight', log.weight]}
-        cylinder={['Cylinder', log.cylinder]}
-        cylinderSize={['Cylinder Size', log.cylinderSize]}
-        gasMixture={['Gas Mixture', log.gasMixture]}
-        feeling={['Feeling', log.feeling]}
-        notes={['Notes', log.notes]}
-        buddy={['Buddy', log.buddy]}
+        <ControlledAccordions
+          key={log.diveTitle}
+          diveTitle={log.diveTitle}
+          diveSite={log.diveSite}
+          date={log.date}
+          diveType={['Dive Type', log.diveType]}
+          maxDepth={['Max Depth', log.maxDepth]}
+          bottomTime={['Bottom Time', log.bottomTime]}
+          weather={['Weather', log.weather]}
+          airTemp={['Air Temperature', log.airTemp]}
+          surfaceTemp={['Surface Temperature', log.surfaceTemp]}
+          bottomTemp={['Bottom Tempreature', log.bottomTemp]}
+          visibility={['Visibility', log.visibility]}
+          waterType={['Water Type', log.waterType]}
+          current={['Current', log.current]}
+          suit={['Suit', log.suit]}
+          weight={['Weight', log.weight]}
+          cylinder={['Cylinder', log.cylinder]}
+          cylinderSize={['Cylinder Size', log.cylinderSize]}
+          gasMixture={['Gas Mixture', log.gasMixture]}
+          feeling={['Feeling', log.feeling]}
+          notes={['Notes', log.notes]}
+          buddy={['Buddy', log.buddy]}
         />
       )
     })
@@ -68,13 +79,13 @@ const Dives = () => {
         <>
           <header>
             <h4>Total dives: {(logs.length === 0) ? 0 : logs.length}</h4>
-            <h4>Dive time: </h4>
+            <h4>Total Dive time: {(logs.length === 0) ? 0 : logs.map((log: DocumentData) => log.bottomTime).reduce((a: string, b: string) => parseInt(a) + parseInt(b))} mins</h4>
           </header>
           <section>
             <>
-              {(logs.length === 0) ? 
-              <Div>{'There are no logs recorded. You can add a new one clicking on "+ New Dive"'}</Div> :
-              handleLogs()}
+              {(logs.length === 0) ?
+                <Div>{'There are no logs recorded. You can add a new one clicking on "+ New Dive"'}</Div> :
+                handleLogs()}
             </>
           </section>
         </>
@@ -90,6 +101,9 @@ const Dives = () => {
 
   return (
     <div className="dives-background">
+      <div className='loader'>
+        <Lottie options={defaultOptions} speed={0.5} />
+      </div>
       <div className='dives-container'>
         <h1 className='title'>Logbook</h1>
         <FormDialog />
