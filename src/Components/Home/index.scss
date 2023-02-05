@@ -12,6 +12,9 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        opacity: 0;
+        transform-style: preserve-3d;
+        animation: fadeIn 1s forwards;
 
         .title {
             font-size: 5rem;
