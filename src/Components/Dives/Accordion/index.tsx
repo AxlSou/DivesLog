@@ -51,7 +51,7 @@ function ControlledAccordions({ ...props }: Props) {
     };
 
   const deleteLog = async (diveTitle: string) => {
-    if (user.uid){
+    if (user.uid) {
       await deleteDoc(doc(db, "DivesLogs", user.uid, "Dives", diveTitle));
       window.location.reload()
     }
@@ -97,28 +97,28 @@ function ControlledAccordions({ ...props }: Props) {
         <Typography sx={{ color: 'text.secondary', width: '20%' }}>{props.date}</Typography>
       </AccordionSummary>
       <AccordionDetails className='log-details'>
-        {(props.diveType[1]) && <Typography>{`${props.diveType[0]}: ${props.diveType[1]}`}</Typography>}
-        {(props.maxDepth) && <Typography>{`${props.maxDepth[0]}: ${props.maxDepth[1]} meters`}</Typography>}
-        {(props.bottomTime) && <Typography>{`${props.bottomTime[0]}: ${props.bottomTime[1]} mins`}</Typography>}
-        {(props.airTemp[1]) && <Typography>{`${props.airTemp[0]}: ${props.airTemp[1]} °C`}</Typography>}
-        {(props.surfaceTemp[1]) && <Typography>{`${props.surfaceTemp[0]}: ${props.surfaceTemp[1]} °C`}</Typography>}
-        {(props.bottomTemp[1]) && <Typography>{`${props.bottomTemp[0]}: ${props.bottomTemp[1]} °C`}</Typography>}
-        {(props.visibility[1]) && <Typography>{`${props.visibility[0]}: ${props.visibility[1]} meters`}</Typography>}
-        {(props.waterType[1]) && <Typography>{`${props.waterType[0]}: ${props.waterType[1]}`}</Typography>}
-        {(props.current[1]) && <Typography>{`${props.current[0]}: ${props.current[1]}`}</Typography>}
-        {(props.suit[1]) && <Typography>{`${props.suit[0]}: ${props.suit[1]}`}</Typography>}
-        {(props.weight[1]) && <Typography>{`${props.weight[0]}: ${props.weight[1]} kg`}</Typography>}
-        {(props.cylinder[1]) && <Typography>{`${props.cylinder[0]}: ${props.cylinder[1]}`}</Typography>}
-        {(props.cylinderSize[1]) && <Typography>{`${props.cylinderSize[0]}: ${props.cylinderSize[1]} liters`}</Typography>}
-        {(props.gasMixture[1]) && <Typography>{`${props.gasMixture[0]}: ${props.gasMixture[1]}`}</Typography>}
-        {(props.feeling[1]) && <Typography>{`${props.feeling[0]}: ${props.feeling[1]}`}</Typography>}
-        {(props.notes[1]) && <Typography>{`${props.notes[0]}: ${props.notes[1]}`}</Typography>}
-        {(props.buddy[1]) && <Typography>{`${props.buddy[0]}: ${props.buddy[1]}`}</Typography>}
+        {(props.diveType[1]) && <div className='info'><Typography>{`${props.diveType[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}>{`${props.diveType[1]}`}</Typography></div>}
+        {(props.maxDepth) && <div className='info'><Typography>{`${props.maxDepth[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.maxDepth[1]} meters`}</Typography></div>}
+        {(props.bottomTime) && <div className='info'><Typography>{`${props.bottomTime[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.bottomTime[1]} mins`}</Typography></div>}
+        {(props.airTemp[1]) && <div className='info'><Typography>{`${props.airTemp[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.airTemp[1]} °C`}</Typography></div>}
+        {(props.surfaceTemp[1]) && <div className='info'><Typography>{`${props.surfaceTemp[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.surfaceTemp[1]} °C`}</Typography></div>}
+        {(props.bottomTemp[1]) && <div className='info'><Typography>{`${props.bottomTemp[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.bottomTemp[1]} °C`}</Typography></div>}
+        {(props.visibility[1]) && <div className='info'><Typography>{`${props.visibility[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.visibility[1]} meters`}</Typography></div>}
+        {(props.waterType[1]) && <div className='info'><Typography>{`${props.waterType[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.waterType[1]}`}</Typography></div>}
+        {(props.current[1]) && <div className='info'><Typography>{`${props.current[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.current[1]}`}</Typography></div>}
+        {(props.suit[1]) && <div className='info'><Typography>{`${props.suit[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.suit[1]}`}</Typography></div>}
+        {(props.weight[1]) && <div className='info'><Typography>{`${props.weight[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.weight[1]} kg`}</Typography></div>}
+        {(props.cylinder[1]) && <div className='info'><Typography>{`${props.cylinder[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.cylinder[1]}`}</Typography></div>}
+        {(props.cylinderSize[1]) && <div className='info'><Typography>{`${props.cylinderSize[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.cylinderSize[1]} liters`}</Typography></div>}
+        {(props.gasMixture[1]) && <div className='info'><Typography>{`${props.gasMixture[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.gasMixture[1]}`}</Typography></div>}
+        {(props.feeling[1]) && <div className='info'><Typography>{`${props.feeling[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.feeling[1]}`}</Typography></div>}
+        {(props.buddy[1]) && <div className='info'><Typography>{`${props.buddy[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.buddy[1]}`}</Typography></div>}
+        {(props.notes[1]) && <div className='info notes'><Typography>{`${props.notes[0]}:`} </Typography> <Typography sx={{ color: 'text.secondary' }}> {`${props.notes[1]}`}</Typography></div>}
       </AccordionDetails>
       <Divider />
       <AccordionActions>
-        <Button size="small" startIcon={<EditIcon />} onClick={() => {editLog(props)}}>Edit</Button>
-        <Button size='small' startIcon={<DeleteIcon />} color="error" onClick={() => {deleteLog(props.diveTitle)}}>
+        <Button size="small" startIcon={<EditIcon />} onClick={() => { editLog(props) }}>Edit</Button>
+        <Button size='small' startIcon={<DeleteIcon />} color="error" onClick={() => { deleteLog(props.diveTitle) }}>
           Delete
         </Button>
       </AccordionActions>
