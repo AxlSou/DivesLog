@@ -4,23 +4,26 @@
     position: absolute;
     z-index: 5;
     background-color: #fff;
+    padding: 0 10rem;
 
     .loader {
         width: 100%;
         position: absolute;
-        margin: auto;
+        left: 0;
         animation: fadeOut 1s 1s;
         animation-fill-mode: forwards;
+        z-index: 8;
     }
 
     .dives-container{
-        margin: 4rem 2rem;
+        margin: 10rem 2rem;
         position: relative;
         display: flex;
         opacity: 0;
         transform-style: preserve-3d;
         animation: fadeIn 1s forwards;
         animation-delay: 1.8s;
+        z-index: 10;
 
         .title {
             position: absolute;
@@ -76,7 +79,7 @@
                 }
             }
 
-            .no-user {
+            .dives-alert {
                 position: relative;
                 top: 10vh;
                 border: 1px solid rgba(26, 32, 39, 0.12);

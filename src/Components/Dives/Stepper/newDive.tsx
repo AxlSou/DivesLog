@@ -9,18 +9,31 @@ import FirstStep from './FirstStep'
 import SecondStep from './SecondStep'
 import ThirdStep from './ThirdStep'
 import FourthStep from './FourthStep'
+import Alert from '@mui/material/Alert';
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { nextStep, previousStep, skipStep } from '../../../Features/stepperSlicer'
 import { setDoc, doc } from 'firebase/firestore'
 import { db } from '../../../firebaseConfig'
+import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
+
 
 const steps = ['General Information', 'Conditions', 'Equipment', 'Experience']
+
+export interface State extends SnackbarOrigin {
+  open: boolean;
+}
 
 const NewDiveForm = () => {
   const { activeStep, skipped } = useAppSelector((store) => store.stepper)
   const { user } = useAppSelector((store) => store.user)
   const { diveTitle, diveSite, date, diveType, maxDepth, bottomTime, weather, airTemp, surfaceTemp, bottomTemp, visibility, waterType, current, suit, weight, cylinder, cylinderSize, gasMixture, feeling, notes, buddy } = useAppSelector((store) => store.form)
   const dispatch = useAppDispatch()
+  const [alert, setAlert] = React.useState<State>({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+  const { vertical, horizontal, open } = alert;
 
   const isStepOptional = (step: number) => {
     return [1, 2, 3].includes(step);
@@ -73,32 +86,44 @@ const NewDiveForm = () => {
     }
   }
 
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setAlert({ ...alert, open: false });
+  };
+
   const handleSubmit = async () => {
-    if (user.uid) {
-      await setDoc(doc(db, "DivesLogs", user.uid, "Dives", diveTitle), {
-        diveTitle: diveTitle,
-        diveSite: diveSite,
-        date: date,
-        diveType: diveType,
-        bottomTime: bottomTime,
-        maxDepth: maxDepth,
-        weather: weather,
-        airTemp: airTemp,
-        surfaceTemp: surfaceTemp,
-        bottomTemp: bottomTemp,
-        visibility: visibility,
-        waterType: waterType,
-        current: current,
-        suit: suit,
-        weight: weight,
-        cylinder: cylinder,
-        cylinderSize: cylinderSize,
-        gasMixture: gasMixture,
-        feeling: feeling,
-        notes: notes,
-        buddy: buddy
-      });
-      window.location.reload()
+    if (diveTitle && diveSite && maxDepth && bottomTime) {
+      if (user.uid) {
+        await setDoc(doc(db, "DivesLogs", user.uid, "Dives", diveTitle), {
+          diveTitle: diveTitle,
+          diveSite: diveSite,
+          date: date,
+          diveType: diveType,
+          bottomTime: bottomTime,
+          maxDepth: maxDepth,
+          weather: weather,
+          airTemp: airTemp,
+          surfaceTemp: surfaceTemp,
+          bottomTemp: bottomTemp,
+          visibility: visibility,
+          waterType: waterType,
+          current: current,
+          suit: suit,
+          weight: weight,
+          cylinder: cylinder,
+          cylinderSize: cylinderSize,
+          gasMixture: gasMixture,
+          feeling: feeling,
+          notes: notes,
+          buddy: buddy
+        });
+        window.location.reload()
+      }
+    } else {
+      return setAlert({ ...alert, open: true })
     }
   }
 
@@ -151,6 +176,17 @@ const NewDiveForm = () => {
             </Button>}
         </Box>
       </React.Fragment>
+      <Snackbar
+        className='form-alert'
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        >
+          <Alert severity="error" onClose={handleClose}>
+            Please fill out all required items '*'
+          </Alert>
+        </Snackbar>
     </div>
   )
 }

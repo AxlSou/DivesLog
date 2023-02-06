@@ -79,12 +79,15 @@ const Dives = () => {
         <>
           <header>
             <h4>Total dives: {(logs.length === 0) ? 0 : logs.length}</h4>
-            <h4>Total Dive time: {(logs.length === 0) ? 0 : logs.map((log: DocumentData) => log.bottomTime).reduce((a: string, b: string) => parseInt(a) + parseInt(b))} mins</h4>
+            <h4>Total Dive time: {(logs.length === 0) ? 0
+              : logs.map((log: DocumentData) => log.bottomTime).reduce((a: string, b: string) => parseInt(a) + parseInt(b))} mins</h4>
           </header>
           <section>
             <>
               {(logs.length === 0) ?
-                <Div>{'There are no logs recorded. You can add a new one clicking on "+ New Dive"'}</Div> :
+                <Box className='dives-alert'>
+                  <Div>{'There are no logs recorded. You can add a new one clicking on "+ New Dive"'}</Div>
+                </Box> :
                 handleLogs()}
             </>
           </section>
@@ -92,7 +95,7 @@ const Dives = () => {
       )
     } else {
       return (
-        <Box className='no-user'>
+        <Box className='dives-alert'>
           <Div>{"You must log in to visualize your logs"}</Div>
         </Box>
       )
