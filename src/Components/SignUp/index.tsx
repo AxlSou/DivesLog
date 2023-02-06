@@ -26,7 +26,6 @@ const SignUp = () => {
     if (email && password) {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userAuth) => {
-          console.log(userAuth)
           updateProfile(userAuth.user, {
             displayName: name,
           })
