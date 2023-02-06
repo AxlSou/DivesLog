@@ -4,20 +4,21 @@
     background-color: #fff;
     position: absolute;
     z-index: 5;
-    overflow: auto;
-    overflow-x: hidden;
+    font-size: 1rem;
+    padding: 0 10rem;
 
     .loader {
         width: 100%;
         height: 100vh;
         position: absolute;
-        margin: auto;
+        left: 0;
         animation: fadeOut 1s 1s;
         animation-fill-mode: forwards;
+        z-index: 8;
     }
 
     .about-container {
-        margin: 4rem  0 0 1rem;
+        margin: 10rem  0 0 1rem;
         position: relative;
         width: 100%;
         display: grid;
@@ -29,6 +30,7 @@
         transform-style: preserve-3d;
         animation: fadeIn 1s forwards;
         animation-delay: 1.8s;
+        z-index: 10;
 
         .about-section {
             text-align: left;
@@ -58,30 +60,10 @@
 
         img {
             display: block;
-            max-width: 700px;
+            width: 100%;
             margin-top: 6rem;
             border-radius: 14px;
             box-shadow: 0 10px 10px -8px rgb(80 90 96 / 33%);
-        }
-    }
-
-    .how-to-use {
-        margin: 4rem 1rem 0 1rem;
-        position: relative;
-        width: 100%;
-        text-align: left;
-        padding: 2rem 3rem;
-        opacity: 0;
-        transform-style: preserve-3d;
-        animation: fadeIn 1s forwards;
-        animation-delay: 1.8s;
-
-        h1 {
-            margin-bottom: 2rem;
-            padding-left: 2rem;
-            font-size: 3rem;
-            text-align: left;
-            border-left: 3px solid #1e73be;
         }
     }
 }

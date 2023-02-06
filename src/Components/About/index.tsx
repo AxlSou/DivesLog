@@ -53,9 +53,6 @@ const About = () => {
         </div>
         <img src={DiverImg} alt="Diver" />
       </div>
-      <div className='how-to-use'>
-        <h1>How to use it?</h1>
-      </div>
     </div>
   )
 }
