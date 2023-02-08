@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../Login/index.scss'
+import './index.scss'
 import { Form, Button, Card, Container } from 'react-bootstrap'
 import { useAppDispatch } from '../../hooks'
 import { auth } from '../../firebaseConfig'
@@ -8,6 +8,8 @@ import { login } from '../../Features/userSlice'
 import { useNavigate, Link } from 'react-router-dom'
 import { setDoc, doc } from 'firebase/firestore'
 import { db } from '../../firebaseConfig'
+import Lottie from 'react-lottie'
+import { defaultOptions } from '../Dives'
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>()
@@ -54,50 +56,55 @@ const SignUp = () => {
   }
 
   return (
-    <div className="form-container">
-      <Container>
-        <Card>
-          <Card.Body>
-            <h2 className="text-center mb-4">Sign Up</h2>
-            <Form onSubmit={register}>
-              <Form.Group id="name">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  required
-                  onChange={(e) => setName(e.currentTarget.value)}
-                />
-              </Form.Group>
-              <Form.Group id="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  required
-                  onChange={(e) => setEmail(e.currentTarget.value)}
-                />
-              </Form.Group>
-              <Form.Group id="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  required
-                  onChange={(e) => setPassword(e.currentTarget.value)}
-                />
-              </Form.Group>
-              <Form.Group id="password-confirm">
-                <Form.Label>Password Confirmation</Form.Label>
-                <Form.Control type="password" required />
-              </Form.Group>
-              <Button className="w-100" type="submit">
-                Sign Up
-              </Button>
-            </Form>
-          </Card.Body>
-        </Card>
-        <div className="w-100 text-center mt-2">
-          Already have an account? <Link to="/login">Log In</Link>
-        </div>
-      </Container>
+    <div className='signUp-background'>
+      <div className="form-container">
+        <Container>
+          <Card>
+            <Card.Body>
+              <h2 className="text-center mb-4">Sign Up</h2>
+              <Form onSubmit={register}>
+                <Form.Group id="name">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    required
+                    onChange={(e) => setName(e.currentTarget.value)}
+                  />
+                </Form.Group>
+                <Form.Group id="email">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    required
+                    onChange={(e) => setEmail(e.currentTarget.value)}
+                  />
+                </Form.Group>
+                <Form.Group id="password">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    required
+                    onChange={(e) => setPassword(e.currentTarget.value)}
+                  />
+                </Form.Group>
+                <Form.Group id="password-confirm">
+                  <Form.Label>Password Confirmation</Form.Label>
+                  <Form.Control type="password" required />
+                </Form.Group>
+                <Button className="w-100" type="submit">
+                  Sign Up
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+          <div className="w-100 text-center mt-2">
+            Already have an account? <Link to="/login">Log In</Link>
+          </div>
+        </Container>
+      </div>
+      <div className='loader'>
+        <Lottie options={defaultOptions} speed={0.5} />
+      </div>
     </div>
   )
 }
