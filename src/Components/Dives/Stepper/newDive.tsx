@@ -15,6 +15,7 @@ import { nextStep, previousStep, skipStep } from '../../../Features/stepperSlice
 import { setDoc, doc } from 'firebase/firestore'
 import { db } from '../../../firebaseConfig'
 import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 
 const steps = ['General Information', 'Conditions', 'Equipment', 'Experience']
@@ -35,6 +36,10 @@ const NewDiveForm = () => {
   });
   const { vertical, horizontal, open } = alert;
 
+  // For Mobile Version
+  const matches = useMediaQuery('(min-width:600px)');
+
+  // Stepper Functions and checks
   const isStepOptional = (step: number) => {
     return [1, 2, 3].includes(step);
   };
@@ -71,6 +76,7 @@ const NewDiveForm = () => {
 
   };
 
+  // Form content in different steps
   const handleStep = () => {
     switch (activeStep) {
       case 0:
@@ -86,6 +92,7 @@ const NewDiveForm = () => {
     }
   }
 
+  // Alerts
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -94,6 +101,7 @@ const NewDiveForm = () => {
     setAlert({ ...alert, open: false });
   };
 
+  // Form submit
   const handleSubmit = async () => {
     if (diveTitle && diveSite && maxDepth && bottomTime) {
       if (user.uid) {
@@ -128,8 +136,8 @@ const NewDiveForm = () => {
   }
 
   return (
-    <div>
-      <Stepper activeStep={activeStep}>
+    <>
+      <Stepper activeStep={activeStep} orientation={(matches) ? 'horizontal' : 'vertical'}>
         {steps.map((label, index) => {
           const stepProps: { completed?: boolean } = {};
           const labelProps: {
@@ -187,7 +195,7 @@ const NewDiveForm = () => {
             Please fill out all required items '*'
           </Alert>
         </Snackbar>
-    </div>
+    </>
   )
 }
 
