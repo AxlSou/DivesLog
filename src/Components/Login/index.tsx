@@ -41,33 +41,36 @@ const LogIn = () => {
     }
   }
 
-  signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential?.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    dispatch(
-      login({
-        email: user.email,
-        uid: user.uid,
-        displayName: user.displayName,
-        token: token
-      })
-    )
+  const googleSignIn = () => {
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential?.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      dispatch(
+        login({
+          email: user.email,
+          uid: user.uid,
+          displayName: user.displayName,
+          token: token
+        })
+      )
 
-    setDoc(doc(db, "DivesLog", user.uid), {user: user.displayName})
+      setDoc(doc(db, "DivesLog", user.uid), {user: user.displayName})
 
-    navigate('/dives')
-    
-  })
-  .catch((error) => {
-    console.error(error.code);
-    console.error(error.message);
-    console.error(error.customData.email);
-    console.error(GoogleAuthProvider.credentialFromError(error))
-  });
+      navigate('/dives')
+      
+    })
+    .catch((error) => {
+      console.error(error.code);
+      console.error(error.message);
+      console.error(error.customData.email);
+      console.error(GoogleAuthProvider.credentialFromError(error))
+    });
+  }
+  
 
   return (
     <div className="login-background">
@@ -96,7 +99,7 @@ const LogIn = () => {
                 <Button className="w-100" type="submit" id='login-with-email'>
                   Sign In
                 </Button>
-                <Button className="w-100" onClick={() => signInWithPopup(auth, provider)}>
+                <Button className="w-100" onClick={googleSignIn}>
                   <GoogleIcon fontSize='small' /> Continue with Google
                 </Button>
               </Form>

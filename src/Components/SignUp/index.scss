@@ -4,7 +4,6 @@
     background-color: #fff;
     position: absolute;
     z-index: 5;
-    overflow: hidden;
     font-size: 1rem;
     display: flex;
     flex-direction: column;
@@ -37,18 +36,18 @@
         animation: fadeIn 1s forwards;
         animation-delay: 1.8s;
 
-        #name{ 
+        #name {
             margin-bottom: 1rem;
         }
-    
+
         #email {
             margin-bottom: 1rem;
         }
-    
+
         #password {
             margin-bottom: 1rem;
         }
-    
+
         #password-confirm {
             margin-bottom: 1.5rem;
         }
