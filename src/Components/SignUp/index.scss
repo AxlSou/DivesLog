@@ -57,9 +57,9 @@
         }
     }
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-height: 900px) {
         .form-container {
-            margin-top: 20rem;
+            margin-top: 25rem;
         }
     }
 }
