@@ -34,11 +34,11 @@
         transform-style: preserve-3d;
         animation: fadeIn 1s forwards;
         animation-delay: 1.8s;
-    
+
         #email {
             margin-bottom: 1.5rem;
         }
-    
+
         #password {
             margin-bottom: 1.5rem;
         }
@@ -48,10 +48,9 @@
         }
     }
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-height: 950px) {
         .form-container {
-            margin-top: 15rem;
+            transform: none;
         }
     }
 }
-
